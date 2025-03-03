@@ -1,2 +1,2 @@
 # HackTheBox-writeup
-HTB retired machines writeup
+HTB machines writeup

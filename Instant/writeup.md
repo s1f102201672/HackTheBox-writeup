@@ -1,8 +1,8 @@
-## Instant
+# Instant
 Linux · Medium
 
-### 初期調査
-#### nmap
+## 初期調査
+### nmap
 ```
 ┌──(kali㉿kali)-[~/htb/Machines/Instant]
 └─$ nmap -sC -sV 10.10.11.37
@@ -26,6 +26,15 @@ Nmap done: 1 IP address (1 host up) scanned in 52.35 seconds
 分かったこと
 - 22/tcp open  ssh
 - 80/tcp open  httpが空いている
+
+
+### 名前解決
+```
+┌──(kali㉿kali)-[~/htb/Machines/Instant]
+└─$ echo "10.10.11.37 instant.htb" | sudo tee -a /etc/hosts
+[sudo] password for kali:
+10.10.11.37 instant.htb
+```
 
 アクセスしてみる
 
@@ -166,7 +175,7 @@ apk_contents  instant  instant.apk  reports
 ・このトークンは **Base64エンコードされたJWT (JSON Web Token)** であり、デコードすれば管理者 (`Admin`) の権限を持っているかがわかる。
 >
 
-#### JWTトークンの解析
+### JWTトークンの解析
 ```
 ┌──(kali㉿kali)-[~/…/smali/com/instantlabs/instant]
 └─$ echo "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkFkbWluIiwid2FsSWQiOiJmMGVjYTZlNS03ODNhLTQ3MWQtOWQ4Zi0wMTYyY2JjOTAwZGIiLCJleHAiOjMzMjU5MzAzNjU2fQ.v0qyyAqDSgyoNFHU7MgRQcDA0Bw99_8AEXKGtWZ6rYA" | cut -d '.' -f2 | base64 -d
@@ -186,7 +195,7 @@ https://jwt.io/
 ・`exp` の値は **33259303656**（Unixタイムスタンプ）普通のUnixタイムは `1700000000` 前後（2023年後半）なので、この値は **数千年後まで有効**
 > 
 
-#### jadxでリバースエンジニアリング
+### jadxでリバースエンジニアリング
 ```
 ┌──(kali㉿kali)-[~/htb/Machines/Instant]
 └─$ jadx-gui         
@@ -209,7 +218,7 @@ mywalletv1.instant.htb
 > 
 を発見
 
-#### 名前解決を追加
+### 名前解決を追加
 ```
 ┌──(kali㉿kali)-[~/htb/Machines/Instant]
 └─$ echo "10.10.11.37 mywalletv1.instant.htb" | sudo tee -a /etc/hosts
@@ -222,7 +231,7 @@ mywalletv1.instant.htb
 ```
 
 ![alt text](image-3.png)
-#### **BurpSuite**
+### **BurpSuite**
 
 ① Burp Suite の `Intercept` を OFF にする
 
@@ -237,7 +246,7 @@ mywalletv1.instant.htb
 `Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkFkbWluIiwid2FsSWQiOiJmMGVjYTZlNS03ODNhLTQ3MWQtOWQ4Zi0wMTYyY2JjOTAwZGIiLCJleHAiOjMzMjU5MzAzNjU2fQ.v0qyyAqDSgyoNFHU7MgRQcDA0Bw99_8AEXKGtWZ6rYA`
 
 
-### ディレクトリトラバーサル
+## ディレクトリトラバーサル
 ローカルファイルインクルージョン（LFI）を利用して `/etc/passwd` の内容が取得できた
 
 ![alt text](image-5.png)
@@ -280,7 +289,7 @@ SSH のプライベートキーは`600`権限でないと使用できない：
 └─$ chmod 600 id_rsa
 ```
 
-### SSHログイン
+## SSHログイン
 shirohigeで
 ```
 ┌──(kali㉿kali)-[~/htb/Machines/Instant]
@@ -308,7 +317,7 @@ shirohige@instant:~$ cat user.txt
 #### user.txt
 `286184282be1b1d93b2973c4ff639033`
 
-### 権限昇格
+## 権限昇格
 低レベルのユーザーであり、'/root' ディレクトリのルートフラグを読み取ることができないので、権限を昇格するか、ルートユーザーの資格情報を取得する方法を探す
 ```
 shirohige@instant:/opt/backups/Solar-PuTTY$ ls

@@ -1,4 +1,4 @@
-# GreenHorn
+# PermX
 
 ## 初期偵察
 ### nmap
@@ -37,6 +37,8 @@ permx.htbにアクセス
 ![](image.png)
 
 
+
+### ffufサブドメイン探索
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines]
 └─$ ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://permx.htb -H "Host: FUZZ.permx.htb" -c -fc 302

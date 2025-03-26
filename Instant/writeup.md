@@ -39,7 +39,7 @@ Nmap done: 1 IP address (1 host up) scanned in 52.35 seconds
 アクセスしてみる
 
 
-![alt text](image.png)
+![](image.png)
 
 ダウンロード押すとinstant.apkが得られる
 

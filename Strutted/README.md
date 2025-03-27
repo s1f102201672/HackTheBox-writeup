@@ -1,5 +1,4 @@
-## Machines
-Instant
+## Instant
 OS : Linux
 Medium
 

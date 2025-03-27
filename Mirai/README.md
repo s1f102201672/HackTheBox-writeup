@@ -1,4 +1,5 @@
 # Mirai
+Linux · Easy
 
 ## 初期偵察
 
@@ -23,8 +24,14 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 77.09 seconds
-
 ```
+
+開放されているポートとサービス
+ポート	状態	サービス	バージョン情報
+22/tcp	open	SSH	OpenSSH 6.7p1 (Debian 5+deb8u3)
+53/tcp	open	DNS	dnsmasq 2.76
+80/tcp	open	HTTP	lighttpd 1.4.35
+
 
 ### 名前解決
 ```

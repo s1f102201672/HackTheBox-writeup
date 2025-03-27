@@ -27,9 +27,10 @@ Nmap done: 1 IP address (1 host up) scanned in 77.09 seconds
 ```
 
 開放されているポートとサービス
-22/tcp	open	SSH	OpenSSH 6.7p1 (Debian 5+deb8u3)
-53/tcp	open	DNS	dnsmasq 2.76
-80/tcp	open	HTTP	lighttpd 1.4.35
+
+- 22/tcp	open	SSH	OpenSSH 6.7p1 (Debian 5+deb8u3)
+- 53/tcp	open	DNS	dnsmasq 2.76
+- 80/tcp	open	HTTP	lighttpd 1.4.35
 
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/Mirai]
@@ -150,11 +151,11 @@ pi@raspberrypi:/home $ cd pi/Desktop/
 pi@raspberrypi:~/Desktop $ ls
 Plex  user.txt
 pi@raspberrypi:~/Desktop $ cat user.txt 
-ff837707441b257a20e32199d7c8838d
+ff8*****************************
 ```
 
 ### user.txt
-`ff837707441b257a20e32199d7c8838d`
+`ff8*****************************`
 
 ## 権限昇格
 
@@ -237,14 +238,14 @@ lost+found
 root.txt
 damnit.txt
 >r &
-3d3e483143ff12ec505d026fa13e020b
+3d3e*****************************`
 Damnit! Sorry man I accidentally deleted your files off the USB stick.
 Do you know if there is any way to get them back?
 -James
 ```
 
 ### root.txt
-`3d3e483143ff12ec505d026fa13e020b`
+`3d3*****************************``
 
 ## まとめ
 今回はデフォルトのusername:passwdで侵入できた

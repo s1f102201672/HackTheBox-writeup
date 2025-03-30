@@ -2,6 +2,10 @@
 HTB machines writeup
 
 
+# Instant
+
+https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Instant
+
 
 linpeas
 home/kaliにインストール

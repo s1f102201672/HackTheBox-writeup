@@ -2,12 +2,30 @@
 HTB machines writeup
 
 
-# Instant
+## Instant
 
 https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Instant
 
 
-linpeas
+## Struttes
+
+https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Strutted
+
+
+## PermX
+
+https://github.com/s1f102201672/HackTheBox-writeup/tree/main/PermX
+
+
+## Mirai
+
+https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Mirai
+
+
+
+
+
+#### linpeas
 home/kaliにインストール
 
 wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh

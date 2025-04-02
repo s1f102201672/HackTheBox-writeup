@@ -12,6 +12,11 @@ https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Instant
 https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Strutted
 
 
+## Cicada
+
+https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Cicada
+
+
 ## PermX
 
 https://github.com/s1f102201672/HackTheBox-writeup/tree/main/PermX

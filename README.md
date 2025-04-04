@@ -7,7 +7,12 @@ HTB machines writeup
 https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Instant
 
 
-## Struttes
+## Cap
+
+https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Cap
+
+
+## Strutted
 
 https://github.com/s1f102201672/HackTheBox-writeup/tree/main/Strutted
 

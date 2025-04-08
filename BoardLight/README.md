@@ -185,7 +185,6 @@ Resolving deltas: 100% (3/3), done.
 ```
 
 
-
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/BoardLight/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253]
 └─$ python3 exploit.py -h         
@@ -204,7 +203,7 @@ positional arguments:
 options:
   -h, --help  show this help message and exit
 ```
-
+# 初期侵入
 ## リバースシェル確立
 
 ```
@@ -324,9 +323,6 @@ hi  enlightenment-data                     0.23.1-4                            a
 version of Enlightenment is installed on BoardLight
 →0.23.1
 
-## CVE-2022-37706
-
-
 ```
 www-data@boardlight:~/html/crm.board.htb/htdocs/conf$ cat conf.php
 cat conf.php
@@ -381,6 +377,7 @@ $dolibarr_mailing_limit_sendbycli='0';
 $dolibarr_main_distrib='standard';
 ```
 
+# 初期侵入
 ## SSHログイン
 
 larissa@boardlight:/tmp$ ls -la
@@ -421,7 +418,8 @@ larissa@boardlight:~$ cat user.txt
 `9fc*****************************`
 
 
-## 権限昇格
+# 権限昇格
+## CVE-2022-37706
 
 https://github.com/MaherAzzouzi/CVE-2022-37706-LPE-exploit
 これを参考にする

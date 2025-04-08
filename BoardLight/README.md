@@ -26,6 +26,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 67.77 seconds
 ```
 
+オープンポート
+
+- 22/tcp (SSH) OpenSSH 8.2p1 Ubuntu 4ubuntu0.11
+- 80/tcp (HTTP)  Apache httpd 2.4.41 (Ubuntu)
+
+
 ## 名前解決
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/BoardLight]
@@ -34,8 +40,14 @@ Nmap done: 1 IP address (1 host up) scanned in 67.77 seconds
 10.10.11.11 boardlight.htb
 ```
 
+http://10.10.11.11にアクセスする
 
 ![](image.png)
+
+
+/do.php
+
+![](image-3.png)
 
 
 ## ディレクトリ探索
@@ -125,11 +137,11 @@ ________________________________________________
  :: Filter           : Response size: 15949
 ________________________________________________
 
-:: Progress: [100000/100000] :: Job [1/1] :: 88 req/sec :: Duration: [0:12:19] :: Errors: 0 ::
+* FUZZ: crm
 ```
 
 
-##　名前解決追加
+## 名前解決追加
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/BoardLight]
 └─$ echo "10.10.11.11 crm.board.htb" | sudo tee -a /etc/hosts
@@ -152,9 +164,13 @@ admin/adminで入れた
 
 
 
-## CVE-2023-30253_PoC
+## CVE-2023-30253
 
 Dolibarr 17.0.0で検索するとCVE-2023-30253が出てくる
+
+>17.0.1 より前の Dolibarr では、大文字の操作 (挿入されたデータ内の <?php ではなく <?PHP) により、認証されたユーザーによるリモート コード実行が許可される
+https://www.tenable.com/cve/CVE-2023-30253
+
 
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/BoardLight]
@@ -215,7 +231,7 @@ index.php
 styles.css.php
 ```
 
-
+SUID (Set User ID) バイナリを検索する
 
 ```
 www-data@boardlight:/tmp$ find / -perm -4000 2>/dev/null
@@ -294,12 +310,18 @@ drwxr-xr-x 128 root root 12288 May 17  2024 ..
 -rwxr-xr-x   1 root root   403 Aug  5  2021 update-notifier-common
 ```
 
+`/usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_sys`
+Enlightenmentデスクトップ環境の一部であり、SUIDビットが設定されていることは異常です。通常、このようなファイルにSUIDビットが設定されていると、攻撃者が権限昇格に利用する可能性があります
+
+
+![](image-4.png)
+
 ```
 larissa@boardlight:/tmp$ dpkg -l | grep enlightenment
 hi  enlightenment                          0.23.1-4                            amd64        X11 window manager based on EFL
 hi  enlightenment-data                     0.23.1-4                            all          X11 window manager based on EFL - run time data files
 ```
-ersion of Enlightenment is installed on BoardLight?
+version of Enlightenment is installed on BoardLight
 →0.23.1
 
 ## CVE-2022-37706
@@ -361,6 +383,14 @@ $dolibarr_main_distrib='standard';
 
 ## SSHログイン
 
+larissa@boardlight:/tmp$ ls -la
+total 1248
+drwxrwxrwt 18 root     root        4096 Apr  8 09:09  .
+drwxr-xr-x 19 root     root        4096 May 17  2024  ..
+drwxrwxr-x  3 larissa  larissa     4096 Apr  8 08:25 ';'
+
+`larissa`を使う
+
 
 $dolibarr_main_db_pass='serverfun2$2023!!';
 
@@ -390,8 +420,8 @@ larissa@boardlight:~$ cat user.txt
 ## user.txt 
 `9fc*****************************`
 
-## 権限昇格
 
+## 権限昇格
 
 https://github.com/MaherAzzouzi/CVE-2022-37706-LPE-exploit
 これを参考にする

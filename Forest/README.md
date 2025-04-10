@@ -51,7 +51,6 @@ Nmap done: 1 IP address (1 host up) scanned in 106.66 seconds
 ADのドメインコントローラぽい
 
 
-
 ## SMB共有→特になし
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines]

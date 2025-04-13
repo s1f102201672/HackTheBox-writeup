@@ -1,5 +1,7 @@
 # LinkVortex
 
+Linux
+
 # 初期探索
 
 ## Nmap
@@ -34,7 +36,7 @@ Nmap done: 1 IP address (1 host up) scanned in 53.29 seconds
 - 22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.10
 - 80/tcp open  http    Apache httpd
 
-##　サブドメイン探索
+## サブドメイン探索
 ```
 ffuf -u http://linkvortex.htb/ -w ./fuzzDicts/subdomainDicts/main.txt -H "Host:FUZZ.linkvortex.htb"  -mc 200
 ```
@@ -169,7 +171,9 @@ CMD ["node", "current/index.js"]
 >オープンソースのコンテンツ管理システムであるGhostで.59.1より前のバージョンでは、認証されたユーザーがシンボリックリンクであるファイルをアップロードできる
 >これを悪用されると、ホストOS上の任意のファイルに対して任意のファイル読み取りが実行される可能性がある
 
+
 https://github.com/0xyassine/CVE-2023-40028
+
 
 ```
 #!/bin/bash

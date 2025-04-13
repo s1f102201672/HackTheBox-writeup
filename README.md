@@ -1,6 +1,10 @@
-# HackTheBox-writeup
-HackTheBox machine writeup
+# HackTheBox-writeups
+HackTheBox machine writeups
 
+
+## LinkVortex
+
+https://github.com/s1f102201672/HackTheBox-writeup/tree/main/LinkVortex
 
 ## Instant
 

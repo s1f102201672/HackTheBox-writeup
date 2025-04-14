@@ -1,6 +1,10 @@
 # HackTheBox-writeups
 HackTheBox machine writeups
 
+<div align="center">
+   <img align="left" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExejhtYnBrd25vczVjcmcwajNueW9hNXVyMXNwbDNhYmdzbHh1c292aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/V9OsQgyaVeJ9Rxf0jH/giphy.webp" width="35%"> 
+   <img align="right" src="images/writeup_banner.png" width="50%">
+</div> 
 
 ## LinkVortex
 

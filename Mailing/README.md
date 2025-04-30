@@ -60,9 +60,9 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 143.91 seconds
 ```
 分かったこと
-- 22/tcp open  ssh
+- メールサーバ関連サービス（SMTP/POP3/IMAP）が複数
 - 80/tcp open  httpが空いている
-
+- SMB共有あり（445番）
 
 ## 名前解決
 ```
@@ -102,6 +102,7 @@ AdministratorPasswordが分かった
 
 `AdministratorPassword=841bb5acfa6779ae432fd7a4e6600ba7`
 
+## パスワード解析
 
 ```
 ┌──(kali㉿kali)-[~/htb/Retired_Machines/Mailing]
@@ -244,7 +245,7 @@ Alexander Hagenah / @xaitax / ah@primepage.de
 ```
 
 
-成功すると町側ではmayaのNTMLが取得できる
+成功すると待ち側ではmayaのNTMLが取得できる
 ```
 [+] Listening for events...
 
